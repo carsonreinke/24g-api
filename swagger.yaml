@@ -1,0 +1,257 @@
+swagger: "2.0"
+info:
+  title: "24G API for video player"
+  version: "0.0.0"
+paths:
+  /pages:
+    get:
+      summary: "Retrieve all pages"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "Successful dataset"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Page"
+  /pages/{pageId}:
+    get:
+      summary: "Retrieve a specific page"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "pageId"
+          in: "path"
+          description: "ID of page"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "Successful dataset"
+          schema:
+            $ref: "#/definitions/Page"
+        "400":
+          description: "Invalid page ID supplied"
+        "404":
+          description: "Page not found"
+  /videos:
+    get:
+      summary: "Retrieve all videos under a specific page"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "pageId"
+          in: "query"
+          description: "Video must belong to a specific page"
+          required: false
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "Successful dataset"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Video"
+        "400":
+          description: "Invalid page ID supplied"
+  /videos/{videoId}:
+    get:
+      summary: "Retrieve a specific video"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "videoId"
+          in: "path"
+          description: "ID of video"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "Successful dataset"
+          schema:
+            $ref: "#/definitions/Video"
+        "400":
+          description: "Invalid video ID supplied"
+        "404":
+          description: "Video not found"
+  /videos/{videoId}/comments:
+    get:
+      summary: "Retrieve comments a video"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "videoId"
+          in: "path"
+          description: "ID of video"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "Successful dataset"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Comment"
+        "400":
+          description: "Invalid video ID supplied"
+        "404":
+          description: "Video not found"
+  /videos/{videoId}/vote/#{vote}:
+    put:
+      summary: "Thumbs up or down for a video"
+      parameters:
+        - name: "videoId"
+          in: "path"
+          description: "ID of video"
+          required: true
+          type: "integer"
+          format: "int64"
+        - name: "vote"
+          in: "path"
+          description: "TODO"
+          required: true
+          type: "string"
+          enum: 
+            - "thumbs-up"
+            - "thumbs-down"
+      responses:
+        "201":
+          description: "Successfully added vote"
+        "400":
+          description: "Invalid video ID or invalid vote supplied"
+        "404":
+          description: "Video not found"
+  /users/{userId}:
+    get:
+      summary: "Retrieve a specific user"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "userId"
+          in: "path"
+          description: "ID of user"
+          required: true
+          type: "integer"
+          format: "int64"
+      responses:
+        "200":
+          description: "TODO"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Invalid user ID supplied"
+        "404":
+          description: "User not found"
+definitions:
+  Timestamps:
+    type: "object"
+    required:
+      - "createdAt"
+    properties:
+      createdAt:
+        type: "string"
+        format: "dateTime"
+      updatedAt:
+        type: "string"
+        format: "dateTime"
+  Page:
+    type: "object"
+    required:
+      - "id"
+      - "title"
+      - "path"
+      - "timestamps"
+    properties:
+      id:
+        type: "integer"
+        format: "int54"
+      title:
+        type: "string"
+      path:
+        type: "string"
+      timestamps:
+        $ref: "#/definitions/Timestamps"
+  Video:
+    type: "object"
+    required:
+      - "id"
+      - "pageId"
+      - "uri"
+      - "thumbnail"
+      - "measurement"
+      - "timestamps"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      pageId:
+        type: "integer"
+        format: "int64"
+      uri:
+        type: "string"
+      thumbnail:
+        type: "string"
+      measurement:
+        $ref: "#/definitions/Measurement"
+      timestamps:
+        $ref: "#/definitions/Timestamps"
+  Measurement:
+    type: "object"
+    required:
+      - "views"
+      - "thumbsUp"
+      - "thumbsDown"
+    properties:
+      views:
+        type: "integer"
+        format: "int32"
+      thumbsUp:
+        type: "integer"
+        format: "int32"
+      thumbsDown:
+        type: "integer"
+        format: "int32"
+  Comment:
+    type: "object"
+    required:
+      - "id"
+      - "videoId"
+      - "text"
+      - "user"
+      - "timestamps"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      videoId:
+        type: "integer"
+        format: "int64"
+      text:
+        type: "string"
+      user:
+        $ref: "#/definitions/User"
+      timestamps:
+        $ref: "#/definitions/Timestamps"
+  User:
+    type: "object"
+    required:
+      - "id"
+      - "firstName"
+      - "lastName"
+      - "timestamps"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      timestamps:
+        $ref: "#/definitions/Timestamps"

@@ -1,20 +1,20 @@
 {
    "type": "sqlite",
    "database": "database.sqlite",
-   "synchronize": true,
-   "logging": false,
+   "synchronize": false,
+   "logging": true,
    "entities": [
-      "src/entity/**/*.ts"
+      "dist/models/**/*.js"
    ],
    "migrations": [
-      "src/migration/**/*.ts"
+      "dist/migrations/**/*.js"
    ],
    "subscribers": [
-      "src/subscriber/**/*.ts"
+      "dist/subscriber/**/*.js"
    ],
    "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
+      "entitiesDir": "src/models",
+      "migrationsDir": "src/migrations",
       "subscribersDir": "src/subscriber"
    }
 }

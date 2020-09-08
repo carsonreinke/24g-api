@@ -1,21 +1,28 @@
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+import express from 'express';
+import http from 'http';
+import applyRoutes from './routes';
+import { createConnection } from 'typeorm';
 
-createConnection().then(async connection => {
+process.on('uncaughtException', error => {
+  console.log(error);
+  process.exit(1);
+});
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
+process.on('unhandledRejection', error => {
+  console.log(error);
+  process.exit(2);
+});
 
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
+createConnection();
 
-    console.log("Here you can setup and run express/koa/any other framework.");
+const app = express();
+const router = express.Router();
+applyRoutes(router);
+app.use(router);
 
-}).catch(error => console.log(error));
+const { PORT = 8080 } = process.env;
+const server = http.createServer(app);
+
+server.listen(PORT, () =>
+  console.log(`Server is running http://localhost:${PORT}...`)
+);
