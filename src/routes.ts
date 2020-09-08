@@ -27,5 +27,6 @@ const applyRoutes = (router: Router) => {
   router.get('/pages/:id', handler(pageController.show));
   router.get('/videos', handler(videoController.index));
   router.get('/videos/:id', handler(videoController.show));
+  router.get('/videos/:id/vote/:vote', handler(videoController.vote));
 };
 export default applyRoutes;
