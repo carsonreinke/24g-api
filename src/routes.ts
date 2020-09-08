@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as pageController from './controllers/page';
+import * as videoController from './controllers/video';
 import { ControllerMethod } from './controllers/general';
 
 /**
@@ -24,5 +25,7 @@ export const handler = (action: ControllerMethod) => async (request: Request, re
 const applyRoutes = (router: Router) => {
   router.get('/pages', handler(pageController.index));
   router.get('/pages/:id', handler(pageController.show));
+  router.get('/videos', handler(videoController.index));
+  router.get('/videos/:id', handler(videoController.show));
 };
 export default applyRoutes;

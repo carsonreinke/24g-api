@@ -1,9 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm';
 
-export class InitialPage1599157321097 implements MigrationInterface {
+export class InitialVideo1599585470987 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
-      name: 'page',
+      name: 'video',
       columns: [
         {
           name: 'id',
@@ -13,12 +13,20 @@ export class InitialPage1599157321097 implements MigrationInterface {
           generationStrategy: 'increment'
         },
         {
+          name: 'pageId',
+          type: 'integer'
+        },
+        {
           name: 'title',
+          type: 'string'
+        },
+        {
+          name: 'uri',
           type: 'varchar',
         },
         {
-          name: 'path',
-          type: 'varchar',
+          name: 'thumbnail',
+          type: 'varchar'
         },
         {
           name: 'createdAt',
@@ -31,9 +39,14 @@ export class InitialPage1599157321097 implements MigrationInterface {
         }
       ]
     }), false);
+    await queryRunner.createForeignKey('video', new TableForeignKey({
+      columnNames: ['pageId'],
+      referencedTableName: 'page',
+      referencedColumnNames: ['id']
+    }));
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('page', false);
+    await queryRunner.dropTable('video', false);
   }
 }

@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { LoadAllServiceMethod, LoadServiceMethod } from './general';
 
 async function repository(): Promise<Repository<Page>> {
-  return (await connection()).getRepository(Page)
+  return (await connection()).getRepository(Page);
 }
 
 export const loadAll: LoadAllServiceMethod<Page> = async () => {

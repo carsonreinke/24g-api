@@ -182,6 +182,7 @@ definitions:
     required:
       - "id"
       - "pageId"
+      - "title"
       - "uri"
       - "thumbnail"
       - "measurement"
@@ -193,6 +194,8 @@ definitions:
       pageId:
         type: "integer"
         format: "int64"
+      title:
+        type: "string"
       uri:
         type: "string"
       thumbnail:
