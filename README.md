@@ -3,7 +3,8 @@
 ## Setup
 
 1. `npm i`
-2. `npm run dev`
+2. `npm run typeorm -- migration:run`
+3. `npm run dev`
 
 ## Documention
 
