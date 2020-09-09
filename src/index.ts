@@ -2,6 +2,7 @@ import express from 'express';
 import http from 'http';
 import applyRoutes from './routes';
 import { createConnection } from 'typeorm';
+import morgan from 'morgan';
 
 process.on('uncaughtException', error => {
   console.log(error);
@@ -17,6 +18,11 @@ createConnection();
 
 const app = express();
 const router = express.Router();
+
+// Request logging
+app.use(morgan('dev'));
+
+// Routes
 applyRoutes(router);
 app.use(router);
 

@@ -1,6 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import * as pageController from './controllers/page';
 import * as videoController from './controllers/video';
+import * as userController from './controllers/user';
+import * as commentController from './controllers/comment';
 import { ControllerMethod } from './controllers/general';
 
 /**
@@ -27,6 +29,8 @@ const applyRoutes = (router: Router) => {
   router.get('/pages/:id', handler(pageController.show));
   router.get('/videos', handler(videoController.index));
   router.get('/videos/:id', handler(videoController.show));
-  router.get('/videos/:id/vote/:vote', handler(videoController.vote));
+  router.put('/videos/:id/vote/:vote', handler(videoController.vote));
+  router.get('/users/:id', handler(userController.show));
+  router.get('/comments', handler(commentController.index));
 };
 export default applyRoutes;

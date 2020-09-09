@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Page } from "./page";
 import { URL } from "url";
 import { Measurement } from "./measurement";
+import { Comment } from "./comment";
 
 @Entity()
 export class Video {
@@ -33,4 +34,7 @@ export class Video {
     eager: true
   })
   measurement: Measurement;
+
+  @OneToMany(type => Comment, comment => comment.videoId)
+  comments: Comment[];
 }
