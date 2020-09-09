@@ -17,6 +17,6 @@ export const loadByVideo: LoadFilteredServiceMethod<Comment> = async (videoId) =
   });
 };
 
-export async function save(page: Comment): Promise<Comment> {
-  return (await repository()).save(page);
+export async function save(comment: Comment): Promise<Comment> {
+  return (await repository()).save(comment);
 }

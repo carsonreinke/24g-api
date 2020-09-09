@@ -1,7 +1,10 @@
-# Awesome Project Build with TypeORM
+# 24G API For A Video Player
 
-Steps to run this project:
+## Setup
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+1. `npm i`
+2. `npm run dev`
+
+## Documention
+
+After starting server with `npm run dev`, go to the Swagger documentation at [http://localhost:8080/docs](http://localhost:8080/docs).

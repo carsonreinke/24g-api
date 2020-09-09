@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  title: "24G API for video player"
+  title: "24G API for a video player"
   version: "0.0.0"
 paths:
   /pages:
@@ -16,6 +16,10 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Page"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"
   /pages/{pageId}:
     get:
       summary: "Retrieve a specific page"
@@ -35,8 +39,16 @@ paths:
             $ref: "#/definitions/Page"
         "400":
           description: "Invalid page ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
         "404":
           description: "Page not found"
+          schema:
+            $ref: "#/definitions/Error"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"      
   /videos:
     get:
       summary: "Retrieve all videos under a specific page"
@@ -58,6 +70,12 @@ paths:
               $ref: "#/definitions/Video"
         "400":
           description: "Invalid page ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"
   /videos/{videoId}:
     get:
       summary: "Retrieve a specific video"
@@ -77,8 +95,16 @@ paths:
             $ref: "#/definitions/Video"
         "400":
           description: "Invalid video ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
         "404":
           description: "Video not found"
+          schema:
+            $ref: "#/definitions/Error"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"
   /comments:
     get:
       summary: "Retrieve comments for a video"
@@ -100,6 +126,35 @@ paths:
               $ref: "#/definitions/Comment"
         "400":
           description: "Invalid video ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"
+    post:
+      summary: "Create a comment for a video"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Comment"
+      responses:
+        "201":
+          description: "Successfully created comment"
+          schema:
+            $ref: "#/definitions/Comment"
+        "400":
+          description: "Validation of comment failed"
+          schema:
+            $ref: "#/definitions/Error"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"
   /videos/{videoId}/vote/#{vote}:
     put:
       summary: "Thumbs up or down for a video"
@@ -123,8 +178,16 @@ paths:
           description: "Successfully added vote"
         "400":
           description: "Invalid video ID or invalid vote supplied"
+          schema:
+            $ref: "#/definitions/Error"
         "404":
           description: "Video not found"
+          schema:
+            $ref: "#/definitions/Error"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"
   /users/{userId}:
     get:
       summary: "Retrieve a specific user"
@@ -144,9 +207,24 @@ paths:
             $ref: "#/definitions/User"
         "400":
           description: "Invalid user ID supplied"
+          schema:
+            $ref: "#/definitions/Error"
         "404":
           description: "User not found"
+          schema:
+            $ref: "#/definitions/Error"
+        "500":
+          description: "An error has occurred"
+          schema:
+            $ref: "#/definitions/Error"
 definitions:
+  Error:
+    type: "object"
+    required:
+      - "error"
+    properties:
+      error:
+        type: "string"
   Timestamps:
     type: "object"
     required:
@@ -221,7 +299,6 @@ definitions:
       - $ref: "#/definitions/Timestamps"
       - type: "object"
         required:
-          - "id"
           - "videoId"
           - "text"
           - "user"

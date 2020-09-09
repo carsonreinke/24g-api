@@ -14,8 +14,8 @@ export const handler = (action: ControllerMethod) => async (request: Request, re
   try {
     return await action(request, response);
   }
-  catch(error) {
-    return response.status(500).json({error: error.message}) && next(error);
+  catch (error) {
+    return response.status(500).json({ error: error.message }) && next(error);
   }
 };
 
@@ -32,5 +32,6 @@ const applyRoutes = (router: Router) => {
   router.put('/videos/:id/vote/:vote', handler(videoController.vote));
   router.get('/users/:id', handler(userController.show));
   router.get('/comments', handler(commentController.index));
+  router.post('/comments', handler(commentController.create));
 };
 export default applyRoutes;

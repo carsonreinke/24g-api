@@ -13,13 +13,15 @@
       "typescript": "3.3.3333"
    },
    "dependencies": {
+      "body-parser": "^1.19.0",
       "express": "^4.17.1",
       "lorem-ipsum": "^2.0.3",
       "morgan": "^1.10.0",
       "reflect-metadata": "^0.1.10",
       "sqlite3": "^4.0.3",
       "swagger-ui-express": "^4.1.4",
-      "typeorm": "0.2.25"
+      "typeorm": "0.2.25",
+      "yamljs": "^0.3.0"
    },
    "main": "dist/index.js",
    "scripts": {
