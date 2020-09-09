@@ -3,5 +3,9 @@
     "src",
     "."
   ],
-  "ext": "ts,json"
+  "ext": "ts,json",
+  "ignore": [
+    "**/*.spec.ts",
+    "src/migrations/*"
+  ]
 }

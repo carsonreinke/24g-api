@@ -1,38 +1,43 @@
 {
-   "name": "24g-api",
-   "version": "0.0.0",
-   "description": "24G API",
-   "license": "MIT",
-   "devDependencies": {
-      "@types/express": "^4.17.8",
-      "@types/node": "^8.0.29",
-      "@types/swagger-ui-express": "^4.1.2",
-      "nodemon": "^2.0.4",
-      "tsconfig-paths": "^3.9.0",
-      "tslint": "^6.1.3",
-      "typescript": "3.3.3333"
-   },
-   "dependencies": {
-      "body-parser": "^1.19.0",
-      "express": "^4.17.1",
-      "lorem-ipsum": "^2.0.3",
-      "morgan": "^1.10.0",
-      "reflect-metadata": "^0.1.10",
-      "sqlite3": "^4.0.3",
-      "swagger-ui-express": "^4.1.4",
-      "typeorm": "0.2.25",
-      "yamljs": "^0.3.0"
-   },
-   "main": "dist/index.js",
-   "scripts": {
-      "clean": "rm -Rf dist",
-      "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-      "build": "npm run clean && tsc",
-      "prestart": "npm run build",
-      "start": "node .",
-      "dev": "npx nodemon --exec \"npm run start\"",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "pretypeorm": "npm run build",
-      "typeorm": "npx typeorm"
-   }
+  "name": "24g-api",
+  "version": "0.0.0",
+  "description": "24G API",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^4.17.8",
+    "@types/node": "^8.0.29",
+    "@types/supertest": "^2.0.10",
+    "@types/swagger-ui-express": "^4.1.2",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.3.0",
+    "tsconfig-paths": "^3.9.0",
+    "tslint": "^6.1.3",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "lorem-ipsum": "^2.0.3",
+    "morgan": "^1.10.0",
+    "reflect-metadata": "^0.1.10",
+    "sqlite3": "^4.0.3",
+    "swagger-ui-express": "^4.1.4",
+    "typeorm": "0.2.25",
+    "yamljs": "^0.3.0"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rm -Rf dist",
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "npm run clean && tsc",
+    "prestart": "npm run build",
+    "start": "node .",
+    "dev": "npx nodemon --exec \"npm run start\"",
+    "test": "npx jest",
+    "pretypeorm": "npm run build",
+    "typeorm": "npx typeorm",
+    "migrate": "npm run typeorm -- migration:run"
+  }
 }
