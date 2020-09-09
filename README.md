@@ -1,5 +1,7 @@
 # 24G API For A Video Player
 
+An API set of endpoints for a mock video player to simply demonstrate knowledge and understanding.  Implementation utilizes TypeScript, Express, TypeORM, and Jest (among others).
+
 ## Setup
 
 1. `npm i`

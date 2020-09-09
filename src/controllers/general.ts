@@ -25,7 +25,7 @@ export const all: <T>(request: Request, response: Response, service: LoadAllServ
 
 export const show: <T>(request: Request, response: Response, service: LoadServiceMethod<T>, callback?: (obj: T) => Promise<void>) => Promise<Response> = async (request, response, service, callback) => {
   const id = request.params.id;
-  const data = await service(parseInt(request.params.id)); // TODO
+  const data = await service(parseInt(request.params.id, 10)); // TODO
   if (data) {
     if (callback) {
       await callback(data);

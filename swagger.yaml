@@ -167,7 +167,7 @@ paths:
           format: "int64"
         - name: "vote"
           in: "path"
-          description: "TODO"
+          description: "Thumbs up to like a video, thumbs down to dislike a video"
           required: true
           type: "string"
           enum: 
@@ -202,7 +202,7 @@ paths:
           format: "int64"
       responses:
         "200":
-          description: "TODO"
+          description: "Successful dataset"
           schema:
             $ref: "#/definitions/User"
         "400":
