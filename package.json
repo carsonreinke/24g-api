@@ -35,7 +35,7 @@
     "prestart": "npm run build",
     "start": "node .",
     "dev": "npx nodemon --exec \"npm run start\"",
-    "test": "npx jest",
+    "test": "env NODE_ENV=test npx jest",
     "pretypeorm": "npm run build",
     "typeorm": "npx typeorm",
     "migrate": "npm run typeorm -- migration:run"

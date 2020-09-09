@@ -9,8 +9,10 @@ export default async () => {
   const app = express();
   const router = express.Router();
 
-  // Request logging
-  app.use(morgan('dev'));
+  // Request logging (but not under testing environment)
+  if (process.env.NODE_ENV !== 'test') {
+    app.use(morgan('dev'));
+  }
 
   // Parse JSON bodies
   app.use(bodyParser.json());

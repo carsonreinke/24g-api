@@ -9,3 +9,7 @@
 ## Documention
 
 After starting server with `npm run dev`, go to the Swagger documentation at [http://localhost:8080/docs](http://localhost:8080/docs).
+
+## Testing
+
+To run tests simply run `npm run test`

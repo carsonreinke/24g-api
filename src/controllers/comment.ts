@@ -1,4 +1,4 @@
-import { ControllerMethod, all as _all, show as _show, respond400, respond200 } from './general';
+import { ControllerMethod, all as _all, show as _show, respond400, respond201 } from './general';
 import { loadAll, loadByVideo, save } from '../services/comment';
 import { load as videoLoad } from '../services/video';
 import { load as userLoad } from '../services/user';
@@ -32,5 +32,5 @@ export const create: ControllerMethod = async (request, response) => {
   }
 
   const saved = await save(comment);
-  return respond200(response, saved);
+  return respond201(response, saved);
 }

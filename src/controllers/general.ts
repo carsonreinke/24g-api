@@ -3,9 +3,11 @@ import { LoadAllServiceMethod, LoadServiceMethod } from '../services/general';
 
 export type ControllerMethod = (request: Request, response: Response) => Promise<Response>;
 
-export const respond200 = (response: Response, data): Response => {
-  return response.status(200).json(data);
+const respond2XX = (statusCode: number = 200, response: Response, data): Response => {
+  return response.status(statusCode).json(data);
 };
+export const respond200 = respond2XX.bind(this, 200);
+export const respond201 = respond2XX.bind(this, 201);
 const respondError = (statusCode: number = 500, response: Response, error: string): Response => {
   return response.status(statusCode).json({error});
 };

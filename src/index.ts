@@ -13,7 +13,7 @@ process.on('unhandledRejection', error => {
 });
 
 (async () => {
-  await createConnection();
+  /*await*/ createConnection(); // We don't need to wait for this
 
   const { PORT = 8080 } = process.env;
   const server = http.createServer(await app());

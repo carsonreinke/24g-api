@@ -1,15 +1,18 @@
 import request from 'supertest';
-import app from '../server';
 import * as pageServices from '../services/page';
+import app from '../server';
 import { Page } from '../models/page';
+import { mocked } from 'ts-jest/utils'
 
 jest.mock('../services/page');
+
+const mockedPageServices = mocked(pageServices, true);
 
 describe('all', () => {
   it('should return all pages', async () => {
     const data = new Page();
     data.title = 'Testing';
-    pageServices.loadAll.mockResolvedValue([
+    mockedPageServices.loadAll.mockResolvedValue([
       data
     ]);
 
@@ -25,7 +28,7 @@ describe('show', () => {
     const data = new Page();
     data.id = 1;
     data.title = 'Testing';
-    pageServices.load.mockResolvedValue(data);
+    mockedPageServices.load.mockResolvedValue(data);
 
     const response = await request(await app()).get('/pages/1').send();
 
